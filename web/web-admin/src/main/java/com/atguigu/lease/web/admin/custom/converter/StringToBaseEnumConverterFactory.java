@@ -1,7 +1,6 @@
 package com.atguigu.lease.web.admin.custom.converter;
 
 import com.atguigu.lease.model.enums.BaseEnum;
-import com.atguigu.lease.model.enums.ItemType;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.stereotype.Component;

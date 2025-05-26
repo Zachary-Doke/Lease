@@ -1,9 +1,9 @@
 package com.atguigu.lease.web.admin.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.lease.model.entity.BrowsingHistory;
-import com.atguigu.lease.web.admin.service.BrowsingHistoryService;
 import com.atguigu.lease.web.admin.mapper.BrowsingHistoryMapper;
+import com.atguigu.lease.web.admin.service.BrowsingHistoryService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

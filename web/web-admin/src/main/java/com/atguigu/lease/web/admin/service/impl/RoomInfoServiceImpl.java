@@ -1,5 +1,6 @@
 package com.atguigu.lease.web.admin.service.impl;
 
+import com.atguigu.lease.common.constant.RedisConstant;
 import com.atguigu.lease.model.entity.*;
 import com.atguigu.lease.model.enums.ItemType;
 import com.atguigu.lease.web.admin.mapper.*;
@@ -14,9 +15,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import kotlin.jvm.internal.Lambda;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -72,6 +73,9 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
 
     @Autowired LeaseTermMapper  leaseTermMapper;
 
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public void saveOrUpdateRoomSubmitVo(RoomSubmitVo roomSubmitVo) {
         Long id = roomSubmitVo.getId();
@@ -83,7 +87,7 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
             LambdaUpdateWrapper<GraphInfo> graphInfoLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
             graphInfoLambdaUpdateWrapper
                     .eq(GraphInfo::getItemType, ItemType.ROOM)
-                    .eq(GraphInfo::getId,  id);
+                    .eq(GraphInfo::getItemId,  id);
             graphInfoService.remove(graphInfoLambdaUpdateWrapper);
 
             // 2.删除属性列表
@@ -110,6 +114,10 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
             LambdaQueryWrapper<RoomLeaseTerm> roomLeaseTermLambdaQueryWrapper = new LambdaQueryWrapper<>();
             roomLeaseTermLambdaQueryWrapper.eq(RoomLeaseTerm::getRoomId,  id);
             roomLeaseTermService.remove(roomLeaseTermLambdaQueryWrapper);
+
+            // 7.删除缓存
+            redisTemplate.delete(RedisConstant.APP_LOGIN_PREFIX + roomSubmitVo.getId());
+
         }
 
         // 1.保存基础信息

@@ -1,9 +1,9 @@
 package com.atguigu.lease.web.admin.service.impl;
 
-import com.atguigu.lease.web.admin.service.CityInfoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.lease.model.entity.CityInfo;
 import com.atguigu.lease.web.admin.mapper.CityInfoMapper;
+import com.atguigu.lease.web.admin.service.CityInfoService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

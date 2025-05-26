@@ -15,7 +15,7 @@ public class JwtUtil {
     public static String createToken(Long userId, String userName) {
 
         String jwt = Jwts.builder()
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 2))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .setSubject("LOGIN_USER")
                 .claim("userId", userId)
                 .claim("userName", userName)
@@ -44,6 +44,6 @@ public class JwtUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(createToken(2L, "user"));
+        System.out.println(createToken(8L, "用户1043"));
     }
 }

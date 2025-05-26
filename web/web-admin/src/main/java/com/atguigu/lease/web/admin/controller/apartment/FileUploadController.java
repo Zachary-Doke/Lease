@@ -3,7 +3,6 @@ package com.atguigu.lease.web.admin.controller.apartment;
 
 import com.atguigu.lease.common.result.Result;
 import com.atguigu.lease.web.admin.service.FileService;
-import io.minio.MinioClient;
 import io.minio.errors.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
